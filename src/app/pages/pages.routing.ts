@@ -13,7 +13,7 @@ const routes: Routes = [
     { path: 'progress', component: ProgressComponent },
     { path: 'char1', component: Chart1Component },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
-    ] 
+    ]
   }
 ];
 
