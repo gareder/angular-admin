@@ -8,11 +8,10 @@ import { Chart1Component } from './chart1/chart1.component';
 
 const routes: Routes = [
 
-  { path: '', component: PagesComponent, children: [
-    { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: PagesComponent, children: [
+    { path: '', component: DashboardComponent },
     { path: 'progress', component: ProgressComponent },
-    { path: 'char1', component: Chart1Component },
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+    { path: 'chart1', component: Chart1Component },
     ]
   }
 ];
