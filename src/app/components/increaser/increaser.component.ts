@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-increaser',
   templateUrl: './increaser.component.html',
   styleUrls: ['./increaser.component.css']
 })
-export class IncreaserComponent {
+export class IncreaserComponent implements OnInit {
 
-  // tslint:disable-next-line: no-input-rename
+  ngOnInit() {
+    this.btnClass = `btn ${ this.btnClass }`;
+  }
+
   @Input('value') progress = 50; // if we want to rename the property to get the value form the parent element
-  // value to emit from this component
-  // tslint:disable-next-line: no-output-rename
+  @Input() btnClass: string = 'btn-primary';
   @Output('value') outputValue: EventEmitter<number> = new EventEmitter();
 
   changeValue(value: number) {
@@ -26,6 +28,15 @@ export class IncreaserComponent {
 
     this.progress = this.progress + value;
     this.outputValue.emit(this.progress);
+  }
+
+  onChange(newValue: number) {
+    if (newValue >= 100) {
+      newValue = 100;
+    } else if (newValue <= 100) {
+      newValue = 0;
+    }
+    this.outputValue.emit(newValue);
   }
 
 }
