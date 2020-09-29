@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-increaser',
@@ -7,11 +7,8 @@ import { Component } from '@angular/core';
 })
 export class IncreaserComponent {
 
-  progress = 50;
-
-  get getPercent() {
-    return `${ this.progress }%`;
-  }
+  // @Input('value') progress = 50; if we want to rename the property to get the value form the parent element
+  @Input() progress = 50;
 
   changeValue(value: number) {
     if (this.progress >= 100 && value >= 0) {
