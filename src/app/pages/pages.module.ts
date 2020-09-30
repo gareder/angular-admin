@@ -11,6 +11,7 @@ import { Chart1Component } from './chart1/chart1.component';
 import { PagesComponent } from './pages.component';
 // import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 
 
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     ProgressComponent,
     Chart1Component,
-    PagesComponent
+    PagesComponent,
+    AccountSettingComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     ProgressComponent,
     Chart1Component,
-    PagesComponent
+    PagesComponent,
+    AccountSettingComponent
   ]
 })
 export class PagesModule { }
