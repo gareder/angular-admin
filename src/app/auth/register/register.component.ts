@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class RegisterComponent {
     validators: this.matchingPasswords('password', 'password2') // Sending the fields we wanna validate
   });
 
-  constructor(private fb: FormBuilder, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
   registerUser() {
     this.formSubmitted = true;
@@ -34,8 +35,8 @@ export class RegisterComponent {
 
     // POST the form
     this.userService.createUser(this.registerForm.value).subscribe(resp => {
-      console.log('User created');
-      console.log(resp);
+      // Moving to dashboard once login is successfull
+      this.router.navigateByUrl('/');
     }, (err) => {
       Swal.fire({
         title: 'Error',
