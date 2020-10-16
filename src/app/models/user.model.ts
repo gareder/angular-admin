@@ -15,15 +15,17 @@ export class User {
   ) {}
 
   get imgUrl() {
-    if (this.img.includes('https')) {
+
+    if (!this.img) {
+      return `${ base_url }/uploads/users/no-img`;
+    } else if (this.img.includes('https')) {
       return this.img;
-    }
-    // http://localhost:8080/api/uploads/users/5555
-    if (this.img) {
+    } else if (this.img) {
       return `${ base_url }/uploads/users/${ this.img }`;
     } else {
       return `${ base_url }/uploads/users/no-img`;
     }
+
   }
 
 }

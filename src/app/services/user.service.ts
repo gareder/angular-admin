@@ -2,10 +2,11 @@ import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
-import { Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
+import { GetUsers } from '../interfaces/get-user.interface';
 import { User } from '../models/user.model';
 
 const base_url = environment.base_url;
@@ -29,6 +30,14 @@ export class UserService {
 
   get id(): string {
     return this.user.id || '';
+  }
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    }
   }
 
   logout() {
@@ -105,6 +114,17 @@ export class UserService {
   loginGoogle(token) {
     return this.http.post(`${ base_url }/login/google`, { token }).pipe(tap((resp: any) => {
       localStorage.setItem('token', resp.token);
+    }));
+  }
+
+  getUsers(from: number = 0) {
+    const url = `${ base_url }/users?from=${ from }`;
+    return this.http.get<GetUsers>(url, this.headers).pipe(map(resp => {
+      const users = resp.users.map(user => new User(user.name, user.email, '', user.img, user.google, user.role, user.id));
+      return {
+        total: resp.total,
+        users
+      }
     }));
   }
 
