@@ -16,6 +16,9 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './maintances/users/users.component';
+import { HospitalsComponent } from './maintances/hospitals/hospitals.component';
+import { MedicsComponent } from './maintances/medics/medics.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -29,7 +32,9 @@ import { UsersComponent } from './maintances/users/users.component';
     PromisesComponent,
     RxjsComponent,
     ProfileComponent,
-    UsersComponent
+    UsersComponent,
+    HospitalsComponent,
+    MedicsComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +43,8 @@ import { UsersComponent } from './maintances/users/users.component';
     RouterModule,
     FormsModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ],
   exports: [
     DashboardComponent,

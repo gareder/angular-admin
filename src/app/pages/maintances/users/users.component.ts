@@ -107,7 +107,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   openModal(user: User) {
-    console.log(user);
     this.modalImageService.openModal('users', user._id, user.img);
   }
 

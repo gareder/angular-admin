@@ -7,7 +7,7 @@
       </div>
   </div>
 </div>
-<div class="row animated fadeIn fast">
+<div *ngIf="loading" class="row animated fadeIn fast">
   <div class="col-12">
     <div class="alert alert-info  text-center">
       <h4 class="alert-heading">Loading...</h4>
@@ -17,33 +17,27 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="!loading" class="row">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Users</h4>
-        <h6 class="card-subtitle">Registered Users.</h6>
+        <h4 class="card-title">Hospitals {{hospitals.length}}</h4>
+        <h6 class="card-subtitle">Registered Hospitals.</h6>
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Avatar</th>
-                <th>Email</th>
+                <th class="w100">Photo</th>
                 <th>Name</th>
-                <th>Role</th>
-                <th>Auth</th>
-                <th class="text-nowrap text-center">Action</th>
+                <th class="text-nowrap">Action</th>
               </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Lunar probe project</td>
-                    <td>Lunar probe project</td>
-                    <td>Lunar probe project</td>
-                    <td>Lunar probe project</td>
-                    <td>Lunar probe project</td>
-                    <td class="text-nowrap">
-                      <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                  <tr  *ngFor="let hospital of hospitals">
+                    <td class="text-center"><img [src]="hospital.img | imagen:'hospitals'" [alt]="hospital.name" class="img-avatar pointer"></td>
+                    <td><input [(ngModel)]="hospital.name" type="text" class="form-control" placeholder="Hospital Name"></td>
+                    <td class="text-nowrap text-center">
+                      <a href="#" data-toggle="tooltip" data-original-title="Save"> <i class="fa fa-save text-inverse m-r-10"></i> </a>
                       <a href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
                     </td>
                   </tr>
