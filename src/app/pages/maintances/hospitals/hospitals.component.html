@@ -28,7 +28,7 @@
           </div>
           <div class="col">
             <div class="text-right">
-              <button class="btn btn-primary"><i class="fa fa-hospital-o"></i>Create Hospital</button>
+              <button (click)="openSwalModal()" class="btn btn-primary"><i class="fa fa-hospital-o"></i>Create Hospital</button>
             </div>
           </div>
         </div>
@@ -38,23 +38,23 @@
               <tr>
                 <th class="w100">Photo</th>
                 <th>Name</th>
-                <th class="text-nowrap">Action</th>
+                <th class="text-nowrap w100">Action</th>
               </tr>
                 </thead>
                 <tbody>
                   <tr  *ngFor="let hospital of hospitals">
-                    <td class="text-center"><img [src]="hospital.img | imagen:'hospitals'" [alt]="hospital.name" class="avatar pointer"></td>
+                    <td class="text-center"><img [src]="hospital.img | imagen:'hospitals'" [alt]="hospital.name" (click)="openModal(hospital)" class="avatar pointer"></td>
                     <td><input [(ngModel)]="hospital.name" type="text" class="form-control" placeholder="Hospital Name"></td>
                     <td class="text-nowrap text-center">
-                      <a href="#" data-toggle="tooltip" data-original-title="Save"> <i class="fa fa-save text-inverse m-r-10"></i> </a>
-                      <a href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
+                      <a (click)="updateHospital(hospital)" class="pointer" data-toggle="tooltip" data-original-title="Save"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                      <a (click)="deleteHospital(hospital)" class="pointer" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
                     </td>
                   </tr>
                 </tbody>
             </table>
           </div>
-          <button class="btn btn-secondary mr-3">Next</button>  
-          <button class="btn btn-secondary">Previous</button>
+          <!-- <button class="btn btn-secondary mr-3">Next</button>  
+          <button class="btn btn-secondary">Previous</button> -->
       </div>
     </div>
   </div>
