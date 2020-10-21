@@ -1,0 +1,13 @@
+.modal-background {
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  left: 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
+}

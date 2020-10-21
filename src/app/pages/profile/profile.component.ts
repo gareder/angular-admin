@@ -57,11 +57,11 @@ export class ProfileComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       this.tempImg = reader.result;
-    }
+    };
   }
 
   uploadImage() {
-    this.fileUploadService.uploadImage(this.uploadFile, 'users', this.user.id).then(img => {
+    this.fileUploadService.uploadImage(this.uploadFile, 'users', this.user._id).then(img => {
       this.user.img = img;
       Swal.fire({
         title: 'Success',

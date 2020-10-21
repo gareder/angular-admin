@@ -29,7 +29,7 @@ export class UserService {
   }
 
   get id(): string {
-    return this.user.id || '';
+    return this.user._id || '';
   }
 
   get headers() {
@@ -37,7 +37,7 @@ export class UserService {
       headers: {
         'x-token': this.token
       }
-    }
+    };
   }
 
   logout() {
@@ -75,8 +75,8 @@ export class UserService {
     }).pipe(
       map((resp: any) => {
         // Getting all the user info
-        const { email, google, img, name, role, _id: id } = resp.user;
-        this.user = new User(name, email, '', img, google, role, id);
+        const { email, google, img, name, role, _id } = resp.user;
+        this.user = new User(name, email, '', img, google, role, _id);
         // Renewed token
         localStorage.setItem('token', resp.token);
         return true;
@@ -97,12 +97,8 @@ export class UserService {
     data = {
       ...data,
       role: this.user.role
-    }
-    return this.http.put(`${ base_url }/users/${ this.id }`, data, {
-      headers: {
-        'x-token': this.token
-      }
-    });
+    };
+    return this.http.put(`${ base_url }/users/${ this.id }`, data, this.headers);
   }
 
   login(formData: LoginForm) {
@@ -120,12 +116,22 @@ export class UserService {
   getUsers(from: number = 0) {
     const url = `${ base_url }/users?from=${ from }`;
     return this.http.get<GetUsers>(url, this.headers).pipe(map(resp => {
-      const users = resp.users.map(user => new User(user.name, user.email, '', user.img, user.google, user.role, user.id));
+      // Problema aqui
+      const users = resp.users.map(user => new User(user.name, user.email, '', user.img, user.google, user.role, user._id));
       return {
         total: resp.total,
         users
-      }
+      };
     }));
+  }
+
+  deleteUser(user: User) {
+    const url = `${ base_url }/users/${ user._id}`;
+    return this.http.delete(url, this.headers);
+  }
+
+  updateRole(user: User) {
+    return this.http.put(`${ base_url }/users/${ user._id }`, user, this.headers);
   }
 
 }
