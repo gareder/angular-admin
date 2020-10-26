@@ -61,4 +61,9 @@ export class SearchesService {
     }));
   }
 
+  searchGlobal(searchQuery: string) {
+    const url = `${ base_url }/all/${ searchQuery }`;
+    return this.http.get(url, this.headers);
+  }
+
 }

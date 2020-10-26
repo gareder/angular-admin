@@ -13,6 +13,7 @@ import { UsersComponent } from './maintances/users/users.component';
 import { HospitalsComponent } from './maintances/hospitals/hospitals.component';
 import { MedicsComponent } from './maintances/medics/medics.component';
 import { MedicComponent } from './maintances/medics/medic.component';
+import { SearchComponent } from './search/search.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'dashboard', component: PagesComponent, canActivate: [ AuthGuard ], children: [
     { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
     { path: 'account-settings', component: AccountSettingComponent, data: { title: 'Account Settings' } },
+    { path: 'search/:query', component: SearchComponent, data: { title: 'Search' } },
     { path: 'chart1', component: Chart1Component, data: { title: 'Charts' } },
     { path: 'profile', component: ProfileComponent, data: { title: 'User Profile' } },
     { path: 'progress', component: ProgressComponent, data: { title: 'Progress' } },

@@ -20,6 +20,7 @@ import { HospitalsComponent } from './maintances/hospitals/hospitals.component';
 import { MedicsComponent } from './maintances/medics/medics.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { MedicComponent } from './maintances/medics/medic.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -36,7 +37,8 @@ import { MedicComponent } from './maintances/medics/medic.component';
     UsersComponent,
     HospitalsComponent,
     MedicsComponent,
-    MedicComponent
+    MedicComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
