@@ -2,7 +2,7 @@
   <div class="col-12">
       <div class="card">
           <div class="card-body">
-              <input type="text" class="form-control" placeholder="Search User">
+              <input type="text" class="form-control" placeholder="Search Hospital" (keyup)="search(searchQuery.value)" #searchQuery>
           </div>
       </div>
   </div>
@@ -43,7 +43,7 @@
                 </thead>
                 <tbody>
                   <tr  *ngFor="let hospital of hospitals">
-                    <td class="text-center"><img [src]="hospital.img | imagen:'hospitals'" [alt]="hospital.name" (click)="openModal(hospital)" class="avatar pointer"></td>
+                    <td class="text-center"><img [src]="hospital.img | imagen:'hospitals'" [alt]="hospital.name" (click)="openModal(hospital)" class="w100 pointer"></td>
                     <td><input [(ngModel)]="hospital.name" type="text" class="form-control" placeholder="Hospital Name"></td>
                     <td class="text-nowrap text-center">
                       <a (click)="updateHospital(hospital)" class="pointer" data-toggle="tooltip" data-original-title="Save"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
