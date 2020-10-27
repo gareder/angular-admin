@@ -32,6 +32,10 @@ export class UserService {
     return this.user._id || '';
   }
 
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.user.role;
+  }
+
   get headers() {
     return {
       headers: {
@@ -42,12 +46,18 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
     this.auth2.signOut().then(() => {
       // ngZone 'cause the auth2.signOut is doing the routing for a moment, so angular gives a warming about it
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
       });
     });
+  }
+
+  saveLocalStorage(token: string, menu: string) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   googleInit() {
@@ -78,7 +88,7 @@ export class UserService {
         const { email, google, img, name, role, _id } = resp.user;
         this.user = new User(name, email, '', img, google, role, _id);
         // Renewed token
-        localStorage.setItem('token', resp.token);
+        this.saveLocalStorage(resp.token, resp.menu);
         return true;
       }),
       // Handling the error with the of to create an observable, so we don't break the code
@@ -88,7 +98,7 @@ export class UserService {
 
   createUser(formData: RegisterForm) {
     return this.http.post(`${ base_url }/users`, formData).pipe(tap((resp: any) => {
-      localStorage.setItem('token', resp.token);
+      this.saveLocalStorage(resp.token, resp.menu);
     }));
   }
 
@@ -103,13 +113,13 @@ export class UserService {
 
   login(formData: LoginForm) {
     return this.http.post(`${ base_url }/login`, formData).pipe(tap((resp: any) => {
-      localStorage.setItem('token', resp.token);
+      this.saveLocalStorage(resp.token, resp.menu);
     }));
   }
 
   loginGoogle(token) {
     return this.http.post(`${ base_url }/login/google`, { token }).pipe(tap((resp: any) => {
-      localStorage.setItem('token', resp.token);
+      this.saveLocalStorage(resp.token, resp.menu);
     }));
   }
 
