@@ -14,11 +14,11 @@ export class RegisterComponent {
   public formSubmitted = false;
 
   public registerForm = this.fb.group({
-    name: ['Eder', [Validators.required, Validators.minLength(2)]],
-    email: ['eder@eder.com', [Validators.required, Validators.email]],
-    password: ['123456', [Validators.required, Validators.minLength(6)]],
-    password2: ['123456', [Validators.required, Validators.minLength(6)]],
-    terms: [true, Validators.requiredTrue]
+    name: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    password2: ['', [Validators.required, Validators.minLength(6)]],
+    terms: [false, Validators.requiredTrue]
   }, {
     validators: this.matchingPasswords('password', 'password2') // Sending the fields we wanna validate
   });
